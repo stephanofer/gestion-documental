@@ -8,7 +8,9 @@ import ProductosPage from "@/pages/ProductosPage";
 import CrearProductoPage from "./pages/CrearProductoPage";
 import RolesPage from "@/pages/RolesPage";
 import DocumentosPage from "@/pages/DocumentosPage";
-import { SidebarProvider } from "@/components/ui/sidebar"; // Importa SidebarProvider
+import { SidebarProvider } from "@/components/ui/sidebar"; // Importa SidebarProvider}
+import CaracteristicasPage from "@/pages/CaracteristicasPage";
+import ValoresPage from "@/pages/ValoresPage";
 
 function ProtectedRoute({ children }: { children: JSX.Element }) {
   const token = useAuthStore((state) => state.token);
@@ -47,6 +49,8 @@ function App() {
         <Route path="documentos" element={<DocumentosPage />} /> 
         <Route path="productos" element={<ProductosPage />} />
         <Route path="productos/crear" element={<CrearProductoPage />} />
+        <Route path="caracteristicas" element={<CaracteristicasPage />} />
+        <Route path="valores" element={<ValoresPage />} />
       </Route>
       <Route path="*" element={<Navigate to="/dashboard" />} />
     </Routes>

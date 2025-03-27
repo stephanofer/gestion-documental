@@ -1,5 +1,5 @@
 import type React from "react";
-import { Bell, ChevronDown, FileText, LogOut, Search, Package, Settings, User, Users, Plus  } from "lucide-react";
+import { Bell, ChevronDown, FileText, LogOut, Search, Package, Settings, User, Users, Plus, List } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/store/AuthStore";
@@ -27,7 +27,7 @@ import {
 } from "@/components/ui/sidebar";
 
 interface DashboardLayoutProps {
-    children?: React.ReactNode; // `children` ahora es opcional
+    children?: React.ReactNode;
   }
   
   export function DashboardLayout({ children }: DashboardLayoutProps) {
@@ -36,7 +36,6 @@ interface DashboardLayoutProps {
         <DashboardSidebar />
         <div className="flex flex-1 flex-col">
           <DashboardHeader />
-          {/* Aquí se renderizan las subpáginas del dashboard */}
           <main className="flex-1 p-6">
             {children || <Outlet />} 
           </main>
@@ -45,15 +44,13 @@ interface DashboardLayoutProps {
     );
   }
 
-
 function DashboardSidebar() {
-
   const logout = useAuthStore((state) => state.logout);
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    logout(); // Borra el token del estado y localStorage
-    navigate("/login", { replace: true }); // Redirige al login
+    logout();
+    navigate("/login", { replace: true });
   };
 
   return (
@@ -128,6 +125,29 @@ function DashboardSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel>Gestión de Características</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link to="/dashboard/caracteristicas">
+                    <List className="h-4 w-4" />
+                    <span>Características</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link to="/dashboard/valores">
+                    <Plus className="h-4 w-4" />
+                    <span>Valores</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
       </SidebarContent>
       <SidebarFooter className="border-t border-border p-4">
         <DropdownMenu>
@@ -162,7 +182,6 @@ function DashboardHeader() {
     return (
       <header className="w-full border-b border-border p-4">
         <div className="flex w-full items-center justify-between">
-          {/* Sección Izquierda */}
           <div className="flex items-center gap-2">
             <SidebarTrigger />
             <div className="relative">
@@ -174,8 +193,6 @@ function DashboardHeader() {
               />
             </div>
           </div>
-  
-          {/* Sección Derecha con ml-auto para empujar hacia la derecha */}
           <div className="flex items-center gap-2 ml-auto">
             <Button variant="ghost" size="icon">
               <Bell className="h-5 w-5" />
@@ -189,7 +206,5 @@ function DashboardHeader() {
       </header>
     );
   }
-  
-  
 
 export default DashboardLayout;

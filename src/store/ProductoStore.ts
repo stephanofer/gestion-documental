@@ -11,6 +11,8 @@ interface ProductoState {
   limpiarProductos: () => void;
   eliminarProducto: (id: number) => Promise<void>;
   seleccionarProducto: (producto: ProductoDTO | null) => void;
+  actualizarProducto: (idProducto: number, productoActualizado: ProductoDTO) => Promise<void>;
+
 }
 
 export const useProductoStore = create<ProductoState>((set) => ({
@@ -51,4 +53,18 @@ export const useProductoStore = create<ProductoState>((set) => ({
   },
 
   seleccionarProducto: (producto) => set({ productoSeleccionado: producto }),
+
+  actualizarProducto: async (idProducto: number, productoActualizado: ProductoDTO) => {
+    if (!idProducto) {
+        console.error("Error: El ID del producto no es válido.");
+        return;
+    }
+    await ProductoService.actualizarProducto(idProducto, productoActualizado);
+    set((state) => ({
+      productos: state.productos.map((p) =>
+        p.idProducto === idProducto ? productoActualizado : p
+      ),
+    }));
+  },
+
 }));

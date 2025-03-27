@@ -13,6 +13,7 @@ export interface CatalogoElectronicoDTO {
   
   export interface ValorCaracteristicaDTO {
     idValorCaracteristica: number;
+    idCaracteristica: number;
     nombreCaracteristica: string;
     valor: string;
   }

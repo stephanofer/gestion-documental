@@ -33,7 +33,6 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
         throw new Error("User data is missing in the response");
       }
 
-      console.log("Server Response:", data);
 
       login({
         token: data.token,
