@@ -11,16 +11,19 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useLogin } from '../mutations/login';
-import { AxiosError, formToJSON } from 'axios';
+import { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
+import { useAuthStore } from '@/store/AuthStore';
 
 export function LoginForm() {
   const [errorMessage, setErrorMessage] = useState<string>('');
   const { mutateAsync, isPending } = useLogin();
 
   const navigate = useNavigate();
+
+  const setAuth = useAuthStore((state) => state.setAuth);
 
   const methods = useForm<Login>({
     mode: 'onBlur',
@@ -30,8 +33,8 @@ export function LoginForm() {
   const onSubmit = async (values: Login) => {
     setErrorMessage('');
     try {
-      const data = await mutateAsync(values);
-      console.log(data);
+      const { role, id, username } = await mutateAsync(values);
+      setAuth(true, { role, id, username });
       navigate('/dashboard');
     } catch (error: unknown) {
       if (error instanceof AxiosError) {
