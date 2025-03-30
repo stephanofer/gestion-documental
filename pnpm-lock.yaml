@@ -56,9 +56,6 @@ importers:
       '@tanstack/react-query-devtools':
         specifier: ^5.70.0
         version: 5.70.0(@tanstack/react-query@5.69.0(react@19.0.0))(react@19.0.0)
-      '@types/axios':
-        specifier: ^0.9.36
-        version: 0.9.36
       axios:
         specifier: ^1.8.2
         version: 1.8.4
@@ -3171,6 +3168,7 @@ snapshots:
       '@radix-ui/react-tooltip': 1.1.8(@types/react-dom@19.0.4(@types/react@19.0.12))(@types/react@19.0.12)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@tailwindcss/vite': 4.0.17(vite@6.2.3(@types/node@22.13.14)(jiti@2.4.2)(lightningcss@1.29.2))
       '@tanstack/react-query': 5.69.0(react@19.0.0)
+      '@tanstack/react-query-devtools': 5.70.0(@tanstack/react-query@5.69.0(react@19.0.0))(react@19.0.0)
       '@types/axios': 0.9.36
       axios: 1.8.4
       class-variance-authority: 0.7.1
